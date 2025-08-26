@@ -1,31 +1,44 @@
-- alias: Rotary Light Up
+# Brightness up
+- alias: Rotary Lamp Brightness Up
+  mode: queued
   trigger:
     - platform: mqtt
-      topic: "home/rotary/light"
-      payload: "brightness_up"
+      topic: inputs/rotary/lamp
+  condition:
+    - condition: template
+      value_template: "{{ trigger.payload.startswith('brightness_up') }}"
   action:
+    - variables:
+        step: "{{ (trigger.payload.split(':')[1] | int) if ':' in trigger.payload else 5 }}"
     - service: light.turn_on
       target:
         entity_id: light.yx_room_light
       data:
-        brightness_step: 20
+        brightness_step_pct: "{{ step }}"
 
-- alias: Rotary Light Down
+# Brightness down
+- alias: Rotary Lamp Brightness Down
+  mode: queued
   trigger:
     - platform: mqtt
-      topic: "home/rotary/light"
-      payload: "brightness_down"
+      topic: inputs/rotary/lamp
+  condition:
+    - condition: template
+      value_template: "{{ trigger.payload.startswith('brightness_down') }}"
   action:
+    - variables:
+        step: "{{ (trigger.payload.split(':')[1] | int) if ':' in trigger.payload else 5 }}"
     - service: light.turn_on
       target:
         entity_id: light.yx_room_light
       data:
-        brightness_step: -20
+        brightness_step_pct: "{{ 0 - step }}"
 
-- alias: Rotary Toggle
+# Toggle on press
+- alias: Rotary Lamp Toggle
   trigger:
     - platform: mqtt
-      topic: "home/rotary/light"
+      topic: inputs/rotary/lamp
       payload: "toggle"
   action:
     - service: light.toggle

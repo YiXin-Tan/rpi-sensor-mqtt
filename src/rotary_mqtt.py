@@ -1,10 +1,12 @@
-from gpiozero import RotaryEncoder, Button
+from gpiozero import RotaryEncoder, Button, Device
 from gpiozero.pins.pigpio import PiGPIOFactory
 import paho.mqtt.client as mqtt
 
+# Use pigpio as the pin factory
 Device.pin_factory = PiGPIOFactory()
 
 mqttc = mqtt.Client()
+mqttc.username_pw_set("homeuser", "xxxxx")
 mqttc.connect("localhost", 1883, 60)
 
 encoder = RotaryEncoder(a=17, b=18, max_steps=100)

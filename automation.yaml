@@ -1,0 +1,33 @@
+- alias: Rotary Light Up
+  trigger:
+    - platform: mqtt
+      topic: "home/rotary/light"
+      payload: "brightness_up"
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.yx_room_light
+      data:
+        brightness_step: 20
+
+- alias: Rotary Light Down
+  trigger:
+    - platform: mqtt
+      topic: "home/rotary/light"
+      payload: "brightness_down"
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.yx_room_light
+      data:
+        brightness_step: -20
+
+- alias: Rotary Toggle
+  trigger:
+    - platform: mqtt
+      topic: "home/rotary/light"
+      payload: "toggle"
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.yx_room_light

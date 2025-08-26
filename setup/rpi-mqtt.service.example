@@ -1,0 +1,19 @@
+[Unit]
+Description=Homemade service for rotary encoder -> MQTT -> HomeAssistant. Made by YX 26/08/2025
+After=network-online.target pigpiod.service mosquitto.service
+Wants=network-online.target pigpiod.service mosquitto.service
+
+[Service]
+Type=simple
+User=sampleuser
+Group=samplegroup
+WorkingDirectory=/path/to/rpi-sensor-mqtt
+Environment=PYTHONUNBUFFERED=1
+EnvironmentFile=/path/to/rpi-sensor-mqtt/.env
+ExecStart=/path/to/python /path/to/rpi-sensor-mqtt/src/rotary-mqtt.py
+Restart=on-failure
+RestartSec=5
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target

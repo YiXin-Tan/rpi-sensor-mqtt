@@ -1,0 +1,1 @@
+## Adding a Rotary Encoder to Home Assistant 

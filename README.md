@@ -20,10 +20,11 @@ The script listens to encoder rotations and button presses, publishing them to a
 | Encoder Pin | Raspberry Pi Pin |
 |-------------|------------------|
 | CLK         | GPIO17 (Pin 11)  |
-| DT          | GPIO27 (Pin 13)  |
-| SW (Button) | GPIO22 (Pin 15)  |
+| DT          | GPIO18 (Pin 12)  |
+| SW (Button) | GPIO27 (Pin 13)  |
 | VCC         | 3.3V (Pin 1)     |
 | GND         | GND (Pin 6)      |
+![img.png](documentation/wiring-diagram.png)
 
 ## 2. Clone the repository
 ```bash
